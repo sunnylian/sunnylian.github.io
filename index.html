@@ -151,6 +151,57 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-无标题Markdown" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a><center>重建二叉树</center></h1><p>有一问题：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+<h4 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h4><p>由先序遍历可知，先序遍历序列中的第一个节点就是根节点，即1，在中序遍历序列中，找到1，根据1，就可以将中序遍历序列分为两部分，1左边的序列为1的左子树，1右边的序列为右子树。因此，得出以下结果：根节点 是{ 1 }； 左子树是：前序{ 2,4,7 } ，中序{ 4,7,2 }； 右子树是：前序{ 3,5,6,8 } ，中序{ 5,3,8,6 }。这时，如果我们把左子树和右子树分别作为新的二叉树，则可以求出其根节点，左子树和右子树。这样，一直用这个方式，就可以实现重建二叉树。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">1.  class TreeNode &#123;</div><div class="line">2.      int val;</div><div class="line">3.      TreeNode left;</div><div class="line">4.      TreeNode right;</div><div class="line">5.      TreeNode(int x) &#123; val = x; &#125;</div><div class="line">6.  &#125;</div><div class="line">7. public class Solution &#123;</div><div class="line">8.    public TreeNode reConstructBinaryTree(int [] pre,int [] in) &#123;</div><div class="line">9.         TreeNode root=reConstructBinaryTree(pre,0,pre.length-1,in,0,in.length-1);</div><div class="line">10.         return root;</div><div class="line">11.     &#125;</div><div class="line">12.    //前序遍历&#123;1,2,4,7,3,5,6,8&#125;和中序遍历序列&#123;4,7,2,1,5,3,8,6&#125;</div><div class="line">13.     private TreeNode reConstructBinaryTree(int [] pre,int startPre,int endPre,int [] in,int startIn,int endIn) &#123;</div><div class="line">14.          </div><div class="line">15.       if(startPre&gt;endPre||startIn&gt;endIn)</div><div class="line">16.             return null;</div><div class="line">17.         TreeNode root=new TreeNode(pre[startPre]);//</div><div class="line">18.          </div><div class="line">19.         for(int i=startIn;i&lt;=endIn;i++)&#123;</div><div class="line">20.             if(in[i]==pre[startPre])&#123;</div><div class="line">21.                 root.left=reConstructBinaryTree(pre,startPre+1,startPre+i-startIn,in,startIn,i-1);//i-startIn是中序遍历中左子树的个数，加上startPre就是前序遍历中左子树的地址</div><div class="line">22.                 root.right=reConstructBinaryTree(pre,i-startIn+startPre+1,endPre,in,i+1,endIn);</div><div class="line">23.             &#125; </div><div class="line">24.         &#125;</div><div class="line">25.         return root;</div><div class="line">26.     &#125;</div><div class="line">27. &#125;</div><div class="line">28. public void PrintTree(TreeNode treenode)&#123;</div><div class="line">29.     if(treenode!=null)&#123;</div><div class="line">30. 	      System.out.print(treenode.val+&quot; &quot;);</div><div class="line">31. 	      PrintTree(treenode.left);</div><div class="line">32. 	      PrintTree(treenode.right);</div><div class="line">33.      &#125;</div><div class="line">34.   &#125;</div><div class="line">35.   public static void main(String[] args) &#123;</div><div class="line">36.       Scanner sc=new Scanner(System.in);</div><div class="line">37.       int[] pre=new int[8];</div><div class="line">38.       int[] in=new int[8];</div><div class="line">39.       for(int i=0;i&lt;8;i++)&#123;</div><div class="line">40. 	        pre[i]=sc.nextInt();</div><div class="line">41.       &#125;</div><div class="line">42.        for(int i=0;i&lt;8;i++)&#123;</div><div class="line">43. 	         in[i]=sc.nextInt();</div><div class="line">44.         &#125;</div><div class="line">45.          Solution4 so=new Solution4();</div><div class="line">46.         TreeNode root=so.reConstructBinaryTree(pre, in);</div><div class="line">47.         so.PrintTree(root);</div><div class="line">48.   &#125;</div><div class="line">49.&#125;</div></pre></td></tr></table></figure>
+<p>  解释以下为什么第9行代码中，使用的是length-1，而不是length。由于第15行代码中，只是判断了startPre大于endPre时或startIn大于endIn时，会返回null，举一个极端例子，如第9行代码中，参数不是pre.length-1，而是pre.length，则在第15行中，会通过，但是在第17行代码中，新建立根节点的时候，pre[startPre]也就是pre[pre.length]，这样就会出现数组越界。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/21/无标题Markdown/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据库批量插入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
