@@ -6,14 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/12 | 我的博客</title>
+  <title>Mybatis中动态传入表明和属性名 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/12/index.html">
+  <meta name="description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis中动态传入表明和属性名">
+<meta property="og:url" content="http://yoursite.com/2017/12/11/index.html">
 <meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta property="og:image" content="http://yoursite.com/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979859102.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979881118.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979900260.png">
+<meta property="og:updated_time" content="2017-12-11T09:25:19.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
+<meta name="twitter:title" content="Mybatis中动态传入表明和属性名">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979859102.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -149,76 +157,158 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Mybatis中动态传入表明和属性名" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Mybatis中动态传入表明和属性名
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/11/" class="archive-article-date">
+
+        
+        <a href="/2017/12/11/" class="archive-article-date">
   	<time datetime="2017-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/11/">Mybatis中动态传入表明和属性名</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select $&#123;propertyname&#125; from $&#123;tablename&#125;;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内容直接替换。但是我在测试时发现，#{ }也不全是加双引号的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from enchangetrain limit #&#123;startRecord&#125;,#&#123;pageSize&#125;;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下<br><img src="/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979859102.png" alt=""><br><img src="/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979881118.png" alt=""><br><img src="/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979900260.png" alt=""><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/12/11/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/01/" class="archive-article-date">
-  	<time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">锐捷6.0版本与虚拟机NAT联网方式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/01/">锐捷6.0版本与虚拟机NAT联网方式</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -241,8 +331,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
