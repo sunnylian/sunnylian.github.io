@@ -173,8 +173,7 @@
       
         <p>&emsp;&emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select $&#123;propertyname&#125; from $&#123;tablename&#125;;</div></pre></td></tr></table></figure></p>
 <p>&emsp;&emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内容直接替换。但是我在测试时发现，#{ }也不全是加双引号的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from enchangetrain limit #&#123;startRecord&#125;,#&#123;pageSize&#125;;</div></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下</p>
-<p>{\% /images/Mybatis中动态传入表明和属性名/1512979859102.png [title] \%}<br><img src="/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979881118.png" alt=""><br><img src="/2017/12/11/images/Mybatis中动态传入表明和属性名/1512979900260.png" alt=""><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }。</p>
+<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下<br><img src="/2017/12/11/./1512979859102.png" alt="Alt text"><br><img src="/2017/12/11/./1512979881118.png" alt="Alt text"><br><img src="/2017/12/11/./1512979900260.png" alt="Alt text"><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }；</p>
 
       
 
