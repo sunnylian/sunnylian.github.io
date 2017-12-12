@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>Mybatis中动态传入表明和属性名 | 我的博客</title>
+  <title>hexo编译有图片的博文 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+  <meta name="description" content="&amp;emsp;&amp;emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis中动态传入表明和属性名">
-<meta property="og:url" content="http://www.sunnylian.com/2017/12/11/index.html">
+<meta property="og:title" content="hexo编译有图片的博文">
+<meta property="og:url" content="http://www.sunnylian.com/2017/12/12/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
-<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/Mybatis_1.png">
-<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/2.png">
-<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/3.png">
-<meta property="og:updated_time" content="2017-12-12T09:26:27.902Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/12/命令行安装图片保存插件.png">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/12/图片生成结果.png">
+<meta property="og:updated_time" content="2017-12-12T13:26:22.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis中动态传入表明和属性名">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
-<meta name="twitter:image" content="http://www.sunnylian.com/2017/12/11/Mybatis_1.png">
+<meta name="twitter:title" content="hexo编译有图片的博文">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX">
+<meta name="twitter:image" content="http://www.sunnylian.com/2017/12/12/命令行安装图片保存插件.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -157,29 +156,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Mybatis中动态传入表明和属性名" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hexo编译有图片的博文" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Mybatis中动态传入表明和属性名
+      hexo编译有图片的博文
     </h1>
   
 
         
-        <a href="/2017/12/11/" class="archive-article-date">
-  	<time datetime="2017-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
+        <a href="/2017/12/12/" class="archive-article-date">
+  	<time datetime="2017-12-12T12:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select $&#123;propertyname&#125; from $&#123;tablename&#125;;</div></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内容直接替换。但是我在测试时发现，#{ }也不全是加双引号的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from enchangetrain limit #&#123;startRecord&#125;,#&#123;pageSize&#125;;</div></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下<br><img src="/2017/12/11/Mybatis_1.png" alt=""><br><img src="/2017/12/11/2.png" alt=""><br><img src="/2017/12/11/3.png" alt=""><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }；</p>
+        <p>&emsp;&emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX.png。但是该路径下并没有图片，所以也就显示不出图片了。</p>
+<p>&emsp;&emsp;<strong>解决方法：</strong> 打开命令行窗口，在安装hexo的路径下输入以下命令安装本地图片保存的插件。将写好的md文件放到/source/_posts时，在该文件夹下同时创建一个与md文件同名的文件夹，将图片放到该文件夹下即可。如下图所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/12/12/命令行安装图片保存插件.png" alt=""><br>&emsp;&emsp;如md文件名为usr.md，那么在_posts文件夹下创建一个叫usr的文件夹，将图片放到里面，md文件中引用该图片直接用XX.png即可。这样经过编译后，会在图片和网页会在同一个文件夹下，访问网址就会出现图片。如下图所示。<br><img src="/2017/12/12/图片生成结果.png" alt=""></p>
 
       
 
@@ -259,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2017/12/11/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2017/12/12/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +272,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/12/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          hexo编译有图片的博文
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">锐捷6.0版本与虚拟机NAT联网方式</div>
+    <a href="/2017/12/11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mybatis中动态传入表明和属性名</div>
       <i class="icon-circle-right"></i>
     </a>
   
