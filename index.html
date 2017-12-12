@@ -172,7 +172,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>&emsp;&emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX.png。但是该路径下并没有图片，所以也就显示不出图片了。</p>
-<p>&emsp;&emsp;<strong>解决方法：</strong> 打开命令行窗口，在安装hexo的路径下输入以下命令安装本地图片保存的插件。将写好的md文件放到/source/_posts时，在该文件夹下同时创建一个与md文件同名的文件夹，将图片放到该文件夹下即可。如下图所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;<strong>解决方法：</strong><br>首先，把主页配置文件_config.yml里的post_asset_folder的值设置为true。其次打开命令行窗口，在安装hexo的路径下输入以下命令安装本地图片保存的插件。将写好的md文件放到/source/_posts时，在该文件夹下同时创建一个与md文件同名的文件夹，将图片放到该文件夹下即可。如下图所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure></p>
 <p><img src="/2017/12/12/命令行安装图片保存插件.png" alt=""><br>&emsp;&emsp;如md文件名为usr.md，那么在_posts文件夹下创建一个叫usr的文件夹，将图片放到里面，md文件中引用该图片直接用XX.png即可。这样经过编译后，会在图片和网页会在同一个文件夹下，访问网址就会出现图片。如下图所示。<br><img src="/2017/12/12/图片生成结果.png" alt=""></p>
 
       
