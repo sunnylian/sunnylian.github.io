@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>我的博客</title>
+  <title>shell命：用户指定hdfs目录不为空时是否删除目录 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据库批量插入记录在很多时候，我们会需要对一个表进行插入大量的数据，并且希望在尽可能短的时间内完成该工作，这里，和大家分享下我平时在做大量数据insert的一些经验。 mysql1insert into student values(&amp;apos;106559&amp;apos;,&amp;apos;路前元&amp;apos;,&amp;apos;男&amp;apos;),(&amp;apos;106553&amp;apos;,&amp;apos;鲁昂&amp;apos">
+  <meta name="description" content="这个题目是HDFS文件操作中常见的题目，但是我在网上竟然没有找到这个问题的解决方法。所以我按照自己的思路，写了一个较长的命令，如下：1if [ &amp;quot;`hadoop fs -ls /user/out/out1/out11`&amp;quot; = &amp;quot;&amp;quot; ]; then read -p &amp;quot;continue delete? &amp;quot; flag; if [ flag==&amp;">
+<meta name="keywords" content="Ubuntu sell命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://www.sunnylian.com/2017/10/12/index.html">
+<meta property="og:title" content="shell命：用户指定hdfs目录不为空时是否删除目录">
+<meta property="og:url" content="http://www.sunnylian.com/2017/12/14/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="数据库批量插入记录在很多时候，我们会需要对一个表进行插入大量的数据，并且希望在尽可能短的时间内完成该工作，这里，和大家分享下我平时在做大量数据insert的一些经验。 mysql1insert into student values(&amp;apos;106559&amp;apos;,&amp;apos;路前元&amp;apos;,&amp;apos;男&amp;apos;),(&amp;apos;106553&amp;apos;,&amp;apos;鲁昂&amp;apos">
-<meta property="og:updated_time" content="2017-10-12T02:40:20.808Z">
+<meta property="og:description" content="这个题目是HDFS文件操作中常见的题目，但是我在网上竟然没有找到这个问题的解决方法。所以我按照自己的思路，写了一个较长的命令，如下：1if [ &amp;quot;`hadoop fs -ls /user/out/out1/out11`&amp;quot; = &amp;quot;&amp;quot; ]; then read -p &amp;quot;continue delete? &amp;quot; flag; if [ flag==&amp;">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/14/shell命令下，用户指定当该目录不为空时是否还删除该目录.png">
+<meta property="og:updated_time" content="2017-12-14T15:32:15.485Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
-<meta name="twitter:description" content="数据库批量插入记录在很多时候，我们会需要对一个表进行插入大量的数据，并且希望在尽可能短的时间内完成该工作，这里，和大家分享下我平时在做大量数据insert的一些经验。 mysql1insert into student values(&amp;apos;106559&amp;apos;,&amp;apos;路前元&amp;apos;,&amp;apos;男&amp;apos;),(&amp;apos;106553&amp;apos;,&amp;apos;鲁昂&amp;apos">
+<meta name="twitter:title" content="shell命：用户指定hdfs目录不为空时是否删除目录">
+<meta name="twitter:description" content="这个题目是HDFS文件操作中常见的题目，但是我在网上竟然没有找到这个问题的解决方法。所以我按照自己的思路，写了一个较长的命令，如下：1if [ &amp;quot;`hadoop fs -ls /user/out/out1/out11`&amp;quot; = &amp;quot;&amp;quot; ]; then read -p &amp;quot;continue delete? &amp;quot; flag; if [ flag==&amp;">
+<meta name="twitter:image" content="http://www.sunnylian.com/2017/12/14/shell命令下，用户指定当该目录不为空时是否还删除该目录.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -153,17 +156,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据库批量插入" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-shell命令下，用户指定当该目录不为空时是否还删除该目录" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      shell命：用户指定hdfs目录不为空时是否删除目录
+    </h1>
+  
+
+        
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
+
+        
+        <a href="/2017/12/14/" class="archive-article-date">
+  	<time datetime="2017-12-14T15:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
+</a>
+        
+      </header>
     
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="数据库批量插入记录"><a href="#数据库批量插入记录" class="headerlink" title="数据库批量插入记录"></a><center>数据库批量插入记录</center></h1><p>在很多时候，我们会需要对一个表进行插入大量的数据，并且希望在尽可能短的时间内完成该工作，这里，和大家分享下我平时在做大量数据insert的一些经验。</p>
-<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">insert into student values(&apos;106559&apos;,&apos;路前元&apos;,&apos;男&apos;),(&apos;106553&apos;,&apos;鲁昂&apos;,&apos;男&apos;);</div></pre></td></tr></table></figure>
-<p>mysql支持这种插入方式，若要插入多条记录，可以用循环的方法进行插入。c#中就可以采用这种循环的方式插入，java也可以，当然java中使用jdbc的函数就可以批量插入函数了，这样更方便。</p>
-<h3 id="orcale"><a href="#orcale" class="headerlink" title="orcale"></a>orcale</h3><p>上面的写法orcale是不支持的，所以只能采用下面的写法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">insert all into course values (&apos;382&apos;,&apos;数据库原理与应用&apos;,3.5,&apos;选修&apos;,4) into course values (&apos;383&apos;,&apos;JAVA语言程序设计&apos;,4.5,&apos;选修&apos;,6) select 1 from dual;</div></pre></td></tr></table></figure></p>
-<p>后面的select语句是从虚拟表里查的，虚拟表一般存储临时的数据，用在存储过程和函数中比较多。select后面跟的数字是指向表中插入多少重复的记录，若为1，则只需要插入一次即可，若为n，则分别向表中插入n条”数据库原理与应用”的记录，再插入n条”JAVA语言程序设计”的记录。</p>
+        <p>这个题目是HDFS文件操作中常见的题目，但是我在网上竟然没有找到这个问题的解决方法。所以我按照自己的思路，写了一个较长的命令，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if [ &quot;`hadoop fs -ls /user/out/out1/out11`&quot; = &quot;&quot; ]; then read -p &quot;continue delete? &quot; flag; if [ flag==&quot;Y&quot; ]; then hadoop fs -rm -r /user/out/out1; else echo &quot;dont delete&quot;; fi else hadoop fs -rm -r /user/out/out1;  fi</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;思路：先判断hdfs文件路径中的一个目录out11是否为空，若不为空，输出“continue delete？”，用户输入Y表示继续删除，否则打印“dont delete”；若目录out11为空，则直接删除该目录。运行结果如下图所示：<br><img src="/2017/12/14/shell命令下，用户指定当该目录不为空时是否还删除该目录.png" alt=""><br>&emsp;&emsp;首先，一定要注意[]和字符之间是要有空格的；第二，第一个if判断语句，注意里面还有标点，否则就成了一个字符长。第三，“；”与其他字符之间也要有空格；最后，别忘了fi。</p>
 
       
 
@@ -193,6 +213,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Ubuntu sell命令</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -243,7 +274,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2017/10/12/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2017/12/14/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -257,18 +288,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/21/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/30/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于hexo和GitHub搭建个人博客</div>
+    <a href="/2017/12/12/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hexo编译有图片的博文</div>
       <i class="icon-circle-right"></i>
     </a>
   
