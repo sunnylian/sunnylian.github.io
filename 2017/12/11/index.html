@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>js动态设置超链接 | 我的博客</title>
+  <title>Mybatis中动态传入表明和属性名 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;&amp;emsp;我们在设计网页的时候，有时候超链接是动态的，这时候我们可以使用js来设置。具体操作如下图所示：。&amp;emsp;&amp;emsp;其实原理非常的简单，首先创建一个超链接节点，将网址和网站名称赋值给这个节点，之后添加到要设置超链接的地方就可以了。在这里要注意到，如果多次添加节点后，会在同一个位置插入多个超链接。所以首先有一个判空操作，如果插入位置已经有超链接节点了，那么先把这个节点删掉">
-<meta name="keywords" content="js,超链接">
+  <meta name="description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js动态设置超链接">
+<meta property="og:title" content="Mybatis中动态传入表明和属性名">
 <meta property="og:url" content="http://www.sunnylian.com/2017/12/11/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;我们在设计网页的时候，有时候超链接是动态的，这时候我们可以使用js来设置。具体操作如下图所示：。&amp;emsp;&amp;emsp;其实原理非常的简单，首先创建一个超链接节点，将网址和网站名称赋值给这个节点，之后添加到要设置超链接的地方就可以了。在这里要注意到，如果多次添加节点后，会在同一个位置插入多个超链接。所以首先有一个判空操作，如果插入位置已经有超链接节点了，那么先把这个节点删掉">
-<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/js动态设置超链接代码.png">
-<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/js动态设置超链接.png">
-<meta property="og:updated_time" content="2017-12-28T14:53:04.075Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/Mybatis_1.png">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/2.png">
+<meta property="og:image" content="http://www.sunnylian.com/2017/12/11/3.png">
+<meta property="og:updated_time" content="2017-12-28T13:45:19.040Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js动态设置超链接">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;我们在设计网页的时候，有时候超链接是动态的，这时候我们可以使用js来设置。具体操作如下图所示：。&amp;emsp;&amp;emsp;其实原理非常的简单，首先创建一个超链接节点，将网址和网站名称赋值给这个节点，之后添加到要设置超链接的地方就可以了。在这里要注意到，如果多次添加节点后，会在同一个位置插入多个超链接。所以首先有一个判空操作，如果插入位置已经有超链接节点了，那么先把这个节点删掉">
-<meta name="twitter:image" content="http://www.sunnylian.com/2017/12/11/js动态设置超链接代码.png">
+<meta name="twitter:title" content="Mybatis中动态传入表明和属性名">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为1select $&amp;#123;propertyname&amp;#125; from $&amp;#123;tablename&amp;#125;; &amp;emsp;&amp;emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内">
+<meta name="twitter:image" content="http://www.sunnylian.com/2017/12/11/Mybatis_1.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -157,14 +158,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js动态设置超链接" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Mybatis中动态传入表明和属性名" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
           <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      js动态设置超链接
+      Mybatis中动态传入表明和属性名
     </h1>
   
 
@@ -183,7 +184,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;我们在设计网页的时候，有时候超链接是动态的，这时候我们可以使用js来设置。具体操作如下图所示：<br><img src="/2017/12/11/js动态设置超链接代码.png" alt="">。<br>&emsp;&emsp;其实原理非常的简单，首先创建一个超链接节点，将网址和网站名称赋值给这个节点，之后添加到要设置超链接的地方就可以了。在这里要注意到，如果多次添加节点后，会在同一个位置插入多个超链接。所以首先有一个判空操作，如果插入位置已经有超链接节点了，那么先把这个节点删掉，再重新添加。效果如下图所示：<img src="/2017/12/11/js动态设置超链接.png" alt=""></p>
+        <p>&emsp;&emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select $&#123;propertyname&#125; from $&#123;tablename&#125;;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内容直接替换。但是我在测试时发现，#{ }也不全是加双引号的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from enchangetrain limit #&#123;startRecord&#125;,#&#123;pageSize&#125;;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下<br><img src="/2017/12/11/Mybatis_1.png" alt=""><br><img src="/2017/12/11/2.png" alt=""><br><img src="/2017/12/11/3.png" alt=""><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }；</p>
 
       
 
@@ -218,11 +221,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">超链接</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
         		</li>
       		
 		</ul>
@@ -292,11 +291,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/11/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/12/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Mybatis中动态传入表明和属性名
+          hexo编译有图片的博文
         
       </div>
     </a>
@@ -433,10 +432,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -446,6 +441,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">超链接</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
               </li>
              
               <li class="article-tag-list-item">
