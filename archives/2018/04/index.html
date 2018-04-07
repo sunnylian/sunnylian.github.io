@@ -6,24 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>IntelliJ IDEA 打包war包到tomcat | 我的博客</title>
+  <title>Archives: 2018/4 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IntelliJ IDEA导出war包步骤如下： &amp;emsp;pom中默认的打包格式为jar包，所以要先改成war包，如下图所示   &amp;emsp;2.点击IDEA右侧的Maven Project，选择需要打包的工程下的Lifecycle，运行clean，先clean一下，清除一下无用信息，如下图所示。   &amp;emsp;3.在package上右键，运行package进行打包，打包成功后控制到会输出如">
-<meta name="keywords" content="IEDA,war包,tomcat8">
-<meta property="og:type" content="article">
-<meta property="og:title" content="IntelliJ IDEA 打包war包到tomcat">
-<meta property="og:url" content="http://www.sunnylian.com/2018/02/28/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="我的博客">
+<meta property="og:url" content="http://www.sunnylian.com/archives/2018/04/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="IntelliJ IDEA导出war包步骤如下： &amp;emsp;pom中默认的打包格式为jar包，所以要先改成war包，如下图所示   &amp;emsp;2.点击IDEA右侧的Maven Project，选择需要打包的工程下的Lifecycle，运行clean，先clean一下，清除一下无用信息，如下图所示。   &amp;emsp;3.在package上右键，运行package进行打包，打包成功后控制到会输出如">
-<meta property="og:image" content="http://www.sunnylian.com/2018/02/28/war.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/02/28/clean.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/02/28/package.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/02/28/打包好的war包.png">
-<meta property="og:updated_time" content="2018-02-28T09:43:57.438Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IntelliJ IDEA 打包war包到tomcat">
-<meta name="twitter:description" content="IntelliJ IDEA导出war包步骤如下： &amp;emsp;pom中默认的打包格式为jar包，所以要先改成war包，如下图所示   &amp;emsp;2.点击IDEA右侧的Maven Project，选择需要打包的工程下的Lifecycle，运行clean，先clean一下，清除一下无用信息，如下图所示。   &amp;emsp;3.在package上右键，运行package进行打包，打包成功后控制到会输出如">
-<meta name="twitter:image" content="http://www.sunnylian.com/2018/02/28/war.png">
+<meta name="twitter:title" content="我的博客">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -159,204 +149,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-IntelliJ-IDEA-打包war包到tomcat" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      IntelliJ IDEA 打包war包到tomcat
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/04/07/" class="archive-article-date">
+  	<time datetime="2018-04-07T08:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/04/07/">通过explain查询和分析SQL的执行计划</a>
     </h1>
   
 
-        
-		<span class="archive-article-date">
-			阅读量 <span id="busuanzi_value_page_pv"></span>
-		</span>
+        <div class="article-info info-on-right">
+          
+          
 
-        
-        <a href="/2018/02/28/" class="archive-article-date">
-  	<time datetime="2018-02-28T08:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IntelliJ IDEA导出war包步骤如下：</p>
-<p>&emsp;pom中默认的打包格式为jar包，所以要先改成war包，如下图所示</p>
-<center><img src="/2018/02/28/war.png" alt="image"></center>
-
-<p>&emsp;2.点击IDEA右侧的Maven Project，选择需要打包的工程下的Lifecycle，运行clean，先clean一下，清除一下无用信息，如下图所示。</p>
-<center><img src="/2018/02/28/clean.png" alt="image"></center>
-
-<p>&emsp;3.在package上右键，运行package进行打包，打包成功后控制到会输出如下信息</p>
-<center><img src="/2018/02/28/package.png" alt="image"></center>
-
-<p>打包完成后，可以在项目的target文件夹下找到打包好的war包，如下所示</p>
-<center><img src="/2018/02/28/打包好的war包.png" alt="image"></center>
-
-<p>由于IntelliJ中内嵌的是tomcat8，所以使用tomcat7时会发生冲突，要改为tomcat7需要在pom中进行配置，比较麻烦，所以我直接下载了tomcat8，将打包好的war包放到tomcat8文件夹下的webapps文件中；之后，打开conf文件夹下的server.xml文件，在Host开头的字段中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Context path=&quot;/&quot; docBase=&quot;test-0.0.1-SNAPSHOT&quot; debug=&quot;0&quot; privileged=&quot;true&quot;/&gt;</div></pre></td></tr></table></figure></p>
-<p>其中”/“为相对路径，不用修改，docBase改为你的war包的名称就可以了。运行bin目录下的startup.bat文件，即可启动你的项目。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IEDA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">war包</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">tomcat8</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/02/28/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/03/26/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mybatis注解方式下批量插入操作
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/01/19/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">select灰色提示设置</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
+    
 
-  
-
-  
 
           </div>
         </div>
@@ -383,8 +219,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
