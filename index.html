@@ -151,6 +151,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-host-header-attack漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/08/">host header attack漏洞</a>
+    </h1>
+  
+
+        
+        
+        <a href="/2018/04/08/" class="archive-article-date">
+  	<time datetime="2018-04-08T15:18:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过绿盟对web系统扫描，发现以下问题。<br><img src="/2018/04/08/漏洞.png" alt="image"><br>简单理解：<br>开发人员开发程序的时候，一般依赖HTTP Host header进行URL跳转以及参数传递等，如在网页中存在如下代码：String basePath=request.getScherme()+”//“+request.getServerName()+”:”+request.getServerPort()+path+”/“;一些HTTP代理工具篡改HTTP报文头部中HOST字段时，request.getServerName()这一部分是返回请求被发送到的服务器的主机名或IP地址，它为客户端提交的HOST值的一部分，该值可以被恶意注入代码。如果被修改，请求就会被发送到修改后的服务器上，当用户正在登陆时，url跳转回伴随着用户名和密码的提交，这样用户名和密码就可能发送到篡改的服务器上，这存在很大的安全漏洞。<br><img src="/2018/04/08/解决方法.png" alt="image"><br>修复意见：<br>1、尽量不要在页面例如JSP中使用request.getServerName()方法引用客户端输入的hostname值，拼接生成URL时引用静态变量定义的服务器域名或者使用相对路径生成URL。<br>2、使用过滤器对所有的URL进行过滤，请求url的host头，如果host头不满足要求，则进行相应的处理。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web程序</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">漏洞</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/08/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-通过explain查询和分析SQL的执行计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -895,88 +974,6 @@
 
 
   
-    <article id="post-重建二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/">重建二叉树</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2017/11/21/" class="archive-article-date">
-  	<time datetime="2017-11-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>有一问题：输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
-<h3 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h3><p>由先序遍历可知，先序遍历序列中的第一个节点就是根节点，即1，在中序遍历序列中，找到1，根据1，就可以将中序遍历序列分为两部分，1左边的序列为1的左子树，1右边的序列为右子树。因此，得出以下结果：根节点 是{ 1 }； 左子树是：前序{ 2,4,7 } ，中序{ 4,7,2 }； 右子树是：前序{ 3,5,6,8 } ，中序{ 5,3,8,6 }。这时，如果我们把左子树和右子树分别作为新的二叉树，则可以求出其根节点，左子树和右子树。这样，一直用这个方式，就可以实现重建二叉树。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">1.  class TreeNode &#123;</div><div class="line">2.      int val;</div><div class="line">3.      TreeNode left;</div><div class="line">4.      TreeNode right;</div><div class="line">5.      TreeNode(int x) &#123; val = x; &#125;</div><div class="line">6.  &#125;</div><div class="line">7. public class Solution &#123;</div><div class="line">8.    public TreeNode reConstructBinaryTree(int [] pre,int [] in) &#123;</div><div class="line">9.         TreeNode root=reConstructBinaryTree(pre,0,pre.length-1,in,0,in.length-1);</div><div class="line">10.         return root;</div><div class="line">11.     &#125;</div><div class="line">12.    //前序遍历&#123;1,2,4,7,3,5,6,8&#125;和中序遍历序列&#123;4,7,2,1,5,3,8,6&#125;</div><div class="line">13.     private TreeNode reConstructBinaryTree(int [] pre,int startPre,int endPre,int [] in,int startIn,int endIn) &#123;</div><div class="line">14.          </div><div class="line">15.       if(startPre&gt;endPre||startIn&gt;endIn)</div><div class="line">16.             return null;</div><div class="line">17.         TreeNode root=new TreeNode(pre[startPre]);//</div><div class="line">18.          </div><div class="line">19.         for(int i=startIn;i&lt;=endIn;i++)&#123;</div><div class="line">20.             if(in[i]==pre[startPre])&#123;</div><div class="line">21.                 root.left=reConstructBinaryTree(pre,startPre+1,startPre+i-startIn,in,startIn,i-1);//i-startIn是中序遍历中左子树的个数，加上startPre就是前序遍历中左子树的地址</div><div class="line">22.                 root.right=reConstructBinaryTree(pre,i-startIn+startPre+1,endPre,in,i+1,endIn);</div><div class="line">23.             &#125; </div><div class="line">24.         &#125;</div><div class="line">25.         return root;</div><div class="line">26.     &#125;</div><div class="line">27. &#125;</div><div class="line">28. public void PrintTree(TreeNode treenode)&#123;</div><div class="line">29.     if(treenode!=null)&#123;</div><div class="line">30. 	      System.out.print(treenode.val+&quot; &quot;);</div><div class="line">31. 	      PrintTree(treenode.left);</div><div class="line">32. 	      PrintTree(treenode.right);</div><div class="line">33.      &#125;</div><div class="line">34.   &#125;</div><div class="line">35.   public static void main(String[] args) &#123;</div><div class="line">36.       Scanner sc=new Scanner(System.in);</div><div class="line">37.       int[] pre=new int[8];</div><div class="line">38.       int[] in=new int[8];</div><div class="line">39.       for(int i=0;i&lt;8;i++)&#123;</div><div class="line">40. 	        pre[i]=sc.nextInt();</div><div class="line">41.       &#125;</div><div class="line">42.        for(int i=0;i&lt;8;i++)&#123;</div><div class="line">43. 	         in[i]=sc.nextInt();</div><div class="line">44.         &#125;</div><div class="line">45.          Solution4 so=new Solution4();</div><div class="line">46.         TreeNode root=so.reConstructBinaryTree(pre, in);</div><div class="line">47.         so.PrintTree(root);</div><div class="line">48.   &#125;</div><div class="line">49.&#125;</div></pre></td></tr></table></figure>
-<p>  解释以下为什么第9行代码中，使用的是length-1，而不是length。由于第15行代码中，只是判断了startPre大于endPre时或startIn大于endIn时，会返回null，举一个极端例子，如第9行代码中，参数不是pre.length-1，而是pre.length，则在第15行中，会通过，但是在第17行代码中，新建立根节点的时候，pre[startPre]也就是pre[pre.length]，这样就会出现数组越界。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1079,18 +1076,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">war包</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
               </li>
              
@@ -1107,11 +1092,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">超链接</a>
+                <a href="javascript:void(0)" class="js-tag color5">war包</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1119,11 +1108,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
+                <a href="javascript:void(0)" class="js-tag color1">web程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html</a>
+                <a href="javascript:void(0)" class="js-tag color3">漏洞</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">超链接</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1139,15 +1136,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">orcale</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1156,6 +1153,14 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
             
             <div class="clearfix"></div>
