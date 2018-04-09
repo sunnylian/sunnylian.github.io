@@ -6,14 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>Tag: hdfs | 我的博客</title>
+  <title>Limit查询优化 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://www.sunnylian.com/tags/hdfs/index.html">
+  <meta name="description" content="limit常用于分页处理，时常会伴随order by 从句使用，因此大多时候会使用filesorts，这样会造成大量的IO问题。通过explain分析SQL语句可知，该查询扫描了4503条记录，并且使用了文件排序的方式，类型为All，在数据量非常大的情况下会造成很多的IO问题。优化方法1、使用有索引的列或主键对order by操作执行结果相同，优化后，该查询使用了index，只扫描了55行记录，并">
+<meta name="keywords" content="limit,查询优化,mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Limit查询优化">
+<meta property="og:url" content="http://www.sunnylian.com/2018/04/09/index.html">
 <meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="limit常用于分页处理，时常会伴随order by 从句使用，因此大多时候会使用filesorts，这样会造成大量的IO问题。通过explain分析SQL语句可知，该查询扫描了4503条记录，并且使用了文件排序的方式，类型为All，在数据量非常大的情况下会造成很多的IO问题。优化方法1、使用有索引的列或主键对order by操作执行结果相同，优化后，该查询使用了index，只扫描了55行记录，并">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/09/limit.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/09/index建立.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/09/index优化.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/09/index问题.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/09/最后优化.png">
+<meta property="og:updated_time" content="2018-04-09T08:58:19.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
+<meta name="twitter:title" content="Limit查询优化">
+<meta name="twitter:description" content="limit常用于分页处理，时常会伴随order by 从句使用，因此大多时候会使用filesorts，这样会造成大量的IO问题。通过explain分析SQL语句可知，该查询扫描了4503条记录，并且使用了文件排序的方式，类型为All，在数据量非常大的情况下会造成很多的IO问题。优化方法1、使用有索引的列或主键对order by操作执行结果相同，优化后，该查询使用了index，只扫描了55行记录，并">
+<meta name="twitter:image" content="http://www.sunnylian.com/2018/04/09/limit.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -149,69 +160,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Limit查询优化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/14/" class="archive-article-date">
-  	<time datetime="2017-12-14T15:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
-</a>
-        </div>
-    	 
+          <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/14/">shell命：用户指定hdfs目录不为空时是否删除目录</a>
+    <h1 class="article-title" itemprop="name">
+      Limit查询优化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
+
+        
+        <a href="/2018/04/09/" class="archive-article-date">
+  	<time datetime="2018-04-09T08:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>limit常用于分页处理，时常会伴随order by 从句使用，因此大多时候会使用filesorts，这样会造成大量的IO问题。<br><img src="/2018/04/09/limit.png" alt="image"><br>通过explain分析SQL语句可知，该查询扫描了4503条记录，并且使用了文件排序的方式，类型为All，在数据量非常大的情况下会造成很多的IO问题。<br>优化方法<br>1、使用有索引的列或主键对order by操作<br><img src="/2018/04/09/index建立.png" alt="image"><br><img src="/2018/04/09/index优化.png" alt="image"><br>执行结果相同，优化后，该查询使用了index，只扫描了55行记录，并且没有使用文件排序。<br><img src="/2018/04/09/index问题.png" alt="image"><br>然而，当起始的记录数比较大时，执行explain查询后，发现SQL语句又使用了文件排序，所以，要进一步进行优化。<br>2、先单独对索引进行条件查询，外层根据查询结构查询，这样就可以避免使用文件排序。<br><img src="/2018/04/09/最后优化.png" alt="image"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">limit</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hdfs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">查询优化</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/04/09/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/08/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">host header attack漏洞</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
           </div>
         </div>
@@ -238,9 +361,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
