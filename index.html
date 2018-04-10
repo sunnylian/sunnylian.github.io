@@ -151,6 +151,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Max-和Count-的优化方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/10/">Max()和Count()的优化方法</a>
+    </h1>
+  
+
+        
+        
+        <a href="/2018/04/10/" class="archive-article-date">
+  	<time datetime="2018-04-10T12:52:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、Max()优化<br> <img src="/2018/04/10/1.png" alt="image"></p>
+<p>查询最晚的日期时可以采用max()函数进行查询，但是通过explain分析sql语句的查询计划，发现type为All型，并且需要检查4503条语句，效率非常的低。<br>解决办法：<br>在birthday_time上建立索引<br><img src="/2018/04/10/2.png" alt="image"><br>此时，重新执行SQL语句<br><img src="/2018/04/10/3.png" alt="image"><br>可以发现，数据库并没有进行任何语句的检查，因为数据库时默认对索引顺序排列，当进行查找时，直接将值返回即可，效率较高。<br>2、Count()优化<br>如何通过一条SQL语句分别得到两个年份出生的人的数量。<br><img src="/2018/04/10/4.png" alt="image"><br>这种查询方法没有讲两个年份的人数分开<br>解决方法：<br><img src="/2018/04/10/5.png" alt="image"><br>当单独对某一列进行计数时，如果某一列的其中一个值为NULL，则count不会进行计数，count(<em>)对所有的行计数，包括NULL，这就是为什么有时候count(</em>)与count(column)有时不相等的原因了。count(YEAR(birthday_time)=1956 or null)指当年份不为1956时，默认为null，这样count就不进行计数了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Max()</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Count()</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/10/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-Limit查询优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -422,11 +506,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -899,83 +983,6 @@
 
 
   
-    <article id="post-Mybatis中动态传入表名和属性名" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/11/">Mybatis中动态传入表名和属性名</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2017/12/11/" class="archive-article-date">
-  	<time datetime="2017-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;有的时候我们需要动态的操作一些字段或表的数据，这时候用#{ }来表示已经不可以了，我们需要用${ }来表示。如动态查询一个表中的某个属性名，SQL语句为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select $&#123;propertyname&#125; from $&#123;tablename&#125;;</div></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;网上有很多的说法，如#{ }会被编译成加双引号的字符串，${ }是参数的内容直接替换。但是我在测试时发现，#{ }也不全是加双引号的。如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from enchangetrain limit #&#123;startRecord&#125;,#&#123;pageSize&#125;;</div></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;上面的sql语句经测试后，可以直接使用，而我在mysql可视化界面中进行了测试，结果如下<br><img src="/2017/12/11/Mybatis_1.png" alt=""><br><img src="/2017/12/11/2.png" alt=""><br><img src="/2017/12/11/3.png" alt=""><br>&emsp;&emsp;由此可以得出结论，#{ }并不是在任何情况下都解析为加双引号的内容的。由于#{ }可以防止SQL注入，所以我们能用#{ }的时候尽量用这个，只有在当表明或属性名动态变化的时候，再用${ }；</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1078,6 +1085,30 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">limit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">查询优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Max()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Count()</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
               </li>
              
@@ -1094,19 +1125,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">limit</a>
+                <a href="javascript:void(0)" class="js-tag color5">批量插入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">查询优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1118,11 +1141,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">批量插入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1131,14 +1150,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">超链接</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1154,15 +1165,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">orcale</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,6 +1182,14 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
             
             <div class="clearfix"></div>
