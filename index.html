@@ -151,76 +151,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-索引优化SQL的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/11/">索引优化SQL的方法</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2018/04/11/" class="archive-article-date">
-  	<time datetime="2018-04-11T09:34:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通常情况下索引会提高我们的查询效率，但是会降低我们的写入效率。但有时索引不仅影响写入效率，同时还会影响查询效率。当数据库中的索引越多时，查询分析的过程越慢，效率也会越低。</p>
-<h5 id="重复及冗余索引"><a href="#重复及冗余索引" class="headerlink" title="重复及冗余索引"></a>重复及冗余索引</h5><p>重复索引指相同的列以相同的顺序建立的同类型索引，如下表中primary key和ID列上的索引就是重复索引。<br><img src="/2018/04/11/1.png" alt="image"><br>冗余索引值多个索引的前缀列相同，或是在联合索引中包含了主键的索引，下面这个例子中key(name,id)就是一个冗余索引。<br><img src="/2018/04/11/2.png" alt="image"></p>
-<h5 id="查找重复及冗余索引"><a href="#查找重复及冗余索引" class="headerlink" title="查找重复及冗余索引"></a>查找重复及冗余索引</h5><ol>
-<li>select a.table_schema as ‘数据名’,a.table_name as ‘表名’,a.index_name as ‘索引1’,b.index_name as ‘索引2’,a.column_name as ‘重复列名’ from statistics a join statistics b on a.table_scherma=b.table_schema and a.table_name=b.table_name and a.seq_in_index=b.seq_in_index and a.column_name=b.column_name where a.seq_in_index=1 and a.index_name&lt;&gt;b.index_name;<pre><code>只能检查一部分问题
-</code></pre></li>
-<li>使用pt_duplicate_key_checker工具检查重复及冗余索引</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
     <article id="post-Max-和Count-的优化方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -976,6 +906,83 @@
 
 
   
+    <article id="post-hexo编译有图片的博文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/12/">hexo编译有图片的博文</a>
+    </h1>
+  
+
+        
+        
+        <a href="/2017/12/12/" class="archive-article-date">
+  	<time datetime="2017-12-12T12:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-12</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;使用基于GitHub和Hexo搭建博客之后，可以实现简单的博客上传，博客内容可以是表格、代码。后来有一天当我想要上传图片时，发现hexo将md文件编译为网页后，打开网页发现图片的路径前面都加了网页的地址。如网页的地址为use/local/lib，md文件中的路径为image/XX.png。这样经过编译后，html中图片的路径变成了use/local/lib/image/XX.png。但是该路径下并没有图片，所以也就显示不出图片了。</p>
+<p>&emsp;&emsp;<strong>解决方法：</strong><br>首先，把主页配置文件_config.yml里的post_asset_folder的值设置为true。其次打开命令行窗口，在安装hexo的路径下输入以下命令安装本地图片保存的插件。将写好的md文件放到/source/_posts时，在该文件夹下同时创建一个与md文件同名的文件夹，将图片放到该文件夹下即可。如下图所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/12/12/命令行安装图片保存插件.png" alt=""><br>&emsp;&emsp;如md文件名为usr.md，那么在_posts文件夹下创建一个叫usr的文件夹，将图片放到里面，md文件中引用该图片直接用XX.png即可。这样经过编译后，会在图片和网页会在同一个文件夹下，访问网址就会出现图片。如下图所示。<br><img src="/2017/12/12/图片生成结果.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/12/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1118,6 +1125,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">批量插入</a>
               </li>
              
@@ -1134,27 +1145,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">超链接</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">orcale</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1167,6 +1162,18 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">orcale</a>
               </li>
              
               <li class="article-tag-list-item">
