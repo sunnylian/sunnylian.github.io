@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>锐捷6.0版本与虚拟机NAT联网方式 | 我的博客</title>
+  <title>MySQL数据库优化之选择合适的数据类型 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;&amp;emsp;很多人都知道，使用虚拟机的时候，使用NAT连网方式可以让虚拟机与主机共享网络，即当主机联网时，虚拟机就可以上网，这样非常方便。 &amp;emsp;&amp;emsp;以前主机使用锐捷客户端，虚拟机也是可以上网的，但更新到6.0版本后，由于锐捷增加了一些限制，会自动每隔一分钟检测VMware NAT Service服务并关闭该服务，所以主机使用锐捷的时候，虚拟机是不可以使用NAT模式连接的">
-<meta name="keywords" content="NAT,虚拟机">
+  <meta name="description" content="选择合适的数据类型数据类型的选择，重点在于合适二字，如何确定选择的数据类型是否合适？1.使用可以存下你数据的最小的数据类型2.使用简单的数据类型。int要比varchar类型再mysql处理上简单，也可以使用时间戳，时间戳的大小与int相同3.尽可能的使用not null字段，如果为null，可能需要额外字段来存储null值，还会增加IO值。4.尽量少用text类型，非用不可时最好考虑分表 可以使">
+<meta name="keywords" content="MySQL,数据类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="锐捷6.0版本与虚拟机NAT联网方式">
-<meta property="og:url" content="http://www.sunnylian.com/2017/12/01/index.html">
+<meta property="og:title" content="MySQL数据库优化之选择合适的数据类型">
+<meta property="og:url" content="http://www.sunnylian.com/2018/04/12/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;很多人都知道，使用虚拟机的时候，使用NAT连网方式可以让虚拟机与主机共享网络，即当主机联网时，虚拟机就可以上网，这样非常方便。 &amp;emsp;&amp;emsp;以前主机使用锐捷客户端，虚拟机也是可以上网的，但更新到6.0版本后，由于锐捷增加了一些限制，会自动每隔一分钟检测VMware NAT Service服务并关闭该服务，所以主机使用锐捷的时候，虚拟机是不可以使用NAT模式连接的">
-<meta property="og:updated_time" content="2017-12-28T13:44:49.097Z">
+<meta property="og:description" content="选择合适的数据类型数据类型的选择，重点在于合适二字，如何确定选择的数据类型是否合适？1.使用可以存下你数据的最小的数据类型2.使用简单的数据类型。int要比varchar类型再mysql处理上简单，也可以使用时间戳，时间戳的大小与int相同3.尽可能的使用not null字段，如果为null，可能需要额外字段来存储null值，还会增加IO值。4.尽量少用text类型，非用不可时最好考虑分表 可以使">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/12/1.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/12/2.png">
+<meta property="og:updated_time" content="2018-04-12T14:49:24.981Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="锐捷6.0版本与虚拟机NAT联网方式">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;很多人都知道，使用虚拟机的时候，使用NAT连网方式可以让虚拟机与主机共享网络，即当主机联网时，虚拟机就可以上网，这样非常方便。 &amp;emsp;&amp;emsp;以前主机使用锐捷客户端，虚拟机也是可以上网的，但更新到6.0版本后，由于锐捷增加了一些限制，会自动每隔一分钟检测VMware NAT Service服务并关闭该服务，所以主机使用锐捷的时候，虚拟机是不可以使用NAT模式连接的">
+<meta name="twitter:title" content="MySQL数据库优化之选择合适的数据类型">
+<meta name="twitter:description" content="选择合适的数据类型数据类型的选择，重点在于合适二字，如何确定选择的数据类型是否合适？1.使用可以存下你数据的最小的数据类型2.使用简单的数据类型。int要比varchar类型再mysql处理上简单，也可以使用时间戳，时间戳的大小与int相同3.尽可能的使用not null字段，如果为null，可能需要额外字段来存储null值，还会增加IO值。4.尽量少用text类型，非用不可时最好考虑分表 可以使">
+<meta name="twitter:image" content="http://www.sunnylian.com/2018/04/12/1.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -154,14 +157,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-锐捷6.0版本与虚拟机NAT联网方式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL数据库优化之选择合适的数据类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
           <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      锐捷6.0版本与虚拟机NAT联网方式
+      MySQL数据库优化之选择合适的数据类型
     </h1>
   
 
@@ -171,8 +174,8 @@
 		</span>
 
         
-        <a href="/2017/12/01/" class="archive-article-date">
-  	<time datetime="2017-11-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
+        <a href="/2018/04/12/" class="archive-article-date">
+  	<time datetime="2018-04-12T09:04:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
 </a>
         
       </header>
@@ -180,9 +183,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;&emsp;很多人都知道，使用虚拟机的时候，使用NAT连网方式可以让虚拟机与主机共享网络，即当主机联网时，虚拟机就可以上网，这样非常方便。</p>
-<p>&emsp;&emsp;以前主机使用锐捷客户端，虚拟机也是可以上网的，但更新到6.0版本后，由于锐捷增加了一些限制，会自动每隔一分钟检测VMware NAT Service服务并关闭该服务，所以主机使用锐捷的时候，虚拟机是不可以使用NAT模式连接的。</p>
-<p>&emsp;&emsp;可以使用桥接模式，这样在虚拟机中需要自己连网，即虚拟机中的网络与主机中的网络无关。或者主机不连接锐捷，连接无线等，虚拟机可以使用NAT连网方式。</p>
+        <h4 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a>选择合适的数据类型</h4><p>数据类型的选择，重点在于合适二字，如何确定选择的数据类型是否合适？<br>1.使用可以存下你数据的最小的数据类型<br>2.使用简单的数据类型。int要比varchar类型再mysql处理上简单，也可以使用时间戳，时间戳的大小与int相同<br>3.尽可能的使用not null字段，如果为null，可能需要额外字段来存储null值，还会增加IO值。<br>4.尽量少用text类型，非用不可时最好考虑分表</p>
+<h5 id="可以使用int来存储，然后查询或插入时使用转换函数，这样可以减小数据库的存储大小。"><a href="#可以使用int来存储，然后查询或插入时使用转换函数，这样可以减小数据库的存储大小。" class="headerlink" title="可以使用int来存储，然后查询或插入时使用转换函数，这样可以减小数据库的存储大小。"></a>可以使用int来存储，然后查询或插入时使用转换函数，这样可以减小数据库的存储大小。</h5><p>1、使用int来存储日期，利用from_unixtime()，unix_timestamp()两个函数来进行转换<br><img src="/2018/04/12/1.png" alt="image"><br>from_unixtime()可以从int转为日期，unix_timestamp()可以从日期转为int<br>2、使用bigint来存储IP地址，利用inet_aton()，inet_ntoa()两个函数来进行转换<br><img src="/2018/04/12/2.png" alt="image"><br>inet_aton()可以从IP转换为bigint，inet_ntoa()可以从bigint转换为ip</p>
 
       
 
@@ -217,11 +219,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NAT</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">虚拟机</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据类型</a>
         		</li>
       		
 		</ul>
@@ -277,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2017/12/01/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/04/12/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +293,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/11/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Mybatis中动态传入表名和属性名
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/21/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">重建二叉树</div>
+    <a href="/2018/04/11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">索引优化SQL的方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
