@@ -151,6 +151,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySQL数据库优化之数据库表的范式化和反范式化优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/">MySQL数据库优化之数据库表的范式和反优化</a>
+    </h1>
+  
+
+        
+        
+        <a href="/2018/04/14/" class="archive-article-date">
+  	<time datetime="2018-04-14T09:22:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="表的范式化"><a href="#表的范式化" class="headerlink" title="表的范式化"></a>表的范式化</h4><p>范式化是指数据库设计的规范，目前说道范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖</p>
+<p><center><img src="/2018/04/14/1.png" alt="image"></center><br>在上表中，存在以下传递函数依赖关系：<br>（商品名称）-&gt;（分类）-&gt;（分类描述）<br>也就是说存在非关键字段“分类描述”对关键字“商品名称”的传递函数依赖。</p>
+<h5 id="不符合第三范式要求的表存在下列问题"><a href="#不符合第三范式要求的表存在下列问题" class="headerlink" title="不符合第三范式要求的表存在下列问题"></a>不符合第三范式要求的表存在下列问题</h5><p>1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录<br>2.数据的插入、更新和删除异常</p>
+<h5 id="解决异常"><a href="#解决异常" class="headerlink" title="解决异常"></a>解决异常</h5><p>对表进行拆分</p>
+<h4 id="表的反范式化"><a href="#表的反范式化" class="headerlink" title="表的反范式化"></a>表的反范式化</h4><p>反反范式化是指为了查询效率的考虑把原本符合第三范式的表适当的增加冗余，以达到优化查询效率的目的，反范式化是一种以空间来换取时间的操作。</p>
+<p><center><img src="/2018/04/14/2.png" alt="image"></center><br>例如在上述表中查询用户订单信息，需要关联多个表，SQL语句如下</p>
+<p><center><img src="/2018/04/14/3.png" alt="image"></center></p>
+<p><center><img src="/2018/04/14/4.png" alt="image"></center><br>这样，查询用户订单信息可以直接从订单表中查到，不需要再关联其他表</p>
+<p><center><img src="/2018/04/14/5.png" alt="image"></center></p>
+<h4 id="数据库表的垂直拆分"><a href="#数据库表的垂直拆分" class="headerlink" title="数据库表的垂直拆分"></a>数据库表的垂直拆分</h4><p>所谓垂直拆封，就是把原来的一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分可以按照以下原则进行：<br>1.把不常用的字段单独存放到一个表中。<br>2.把大字段独立存放到一个表中。<br>3.把经常一起使用的字段放到一起。</p>
+<p><center><img src="/2018/04/14/6.png" alt="image"></center><br>将该表分为以下两个表，就是将列分成两个表</p>
+<p><center><img src="/2018/04/14/7.png" alt="image"></center></p>
+<p><center><img src="/2018/04/14/8.png" alt="image"></center></p>
+<h4 id="数据库表的水平拆分"><a href="#数据库表的水平拆分" class="headerlink" title="数据库表的水平拆分"></a>数据库表的水平拆分</h4><p>表的水平拆分是为了解决单表的数据量过大的问题，水平拆分分表每一个表的机构都是完全一致的。</p>
+<p><center><img src="/2018/04/14/9.png" alt="image"></center></p>
+<h5 id="常用的水平拆分方法："><a href="#常用的水平拆分方法：" class="headerlink" title="常用的水平拆分方法："></a>常用的水平拆分方法：</h5><p>1.对customer_id进行hash运算，如果要拆分成5个表则使用mod(customer_id,5)取出0~4个值<br>2.针对不同的hashID把数据存到不同的表中。</p>
+<h5 id="挑战："><a href="#挑战：" class="headerlink" title="挑战："></a>挑战：</h5><p>1.跨分区表进行数据查询<br>2.统计及后台报表操作(前台为了提高查询效率使用分表，后台为了更好的统计需要汇总表)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">范式和反范式优化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/14/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-MySQL数据库优化之选择合适的数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -907,85 +1002,6 @@
 
 
   
-    <article id="post-js动态设置超链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/28/">js动态设置超链接</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2017/12/28/" class="archive-article-date">
-  	<time datetime="2017-12-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&emsp;&emsp;我们在设计网页的时候，有时候超链接是动态的，这时候我们可以使用js来设置。具体操作如下图所示：<br><img src="/2017/12/28/js动态设置超链接代码.png" alt=""><br>&emsp;&emsp;其实原理非常的简单，首先创建一个超链接节点，将网址和网站名称赋值给这个节点，之后添加到要设置超链接的地方就可以了。在这里要注意到，如果多次添加节点后，会在同一个位置插入多个超链接。所以首先有一个判空操作，如果插入位置已经有超链接节点了，那么先把这个节点删掉，再重新添加。效果如下图所示：<img src="/2017/12/28/js动态设置超链接.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">超链接</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/28/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1100,7 +1116,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">范式和反范式优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1124,11 +1148,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据类型</a>
+                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">war包</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1140,11 +1168,31 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">超链接</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">索引优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hdfs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1168,39 +1216,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hdfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">索引优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NAT</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">war包</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
               </li>
             
             <div class="clearfix"></div>

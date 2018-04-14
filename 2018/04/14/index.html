@@ -6,14 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>Tag: IEDA | 我的博客</title>
+  <title>MySQL数据库优化之数据库表的范式和反优化 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://www.sunnylian.com/tags/IEDA/index.html">
+  <meta name="description" content="表的范式化范式化是指数据库设计的规范，目前说道范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖 在上表中，存在以下传递函数依赖关系：（商品名称）-&amp;gt;（分类）-&amp;gt;（分类描述）也就是说存在非关键字段“分类描述”对关键字“商品名称”的传递函数依赖。 不符合第三范式要求的表存在下列问题1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录2.数">
+<meta name="keywords" content="范式和反范式优化,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库优化之数据库表的范式和反优化">
+<meta property="og:url" content="http://www.sunnylian.com/2018/04/14/index.html">
 <meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="表的范式化范式化是指数据库设计的规范，目前说道范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖 在上表中，存在以下传递函数依赖关系：（商品名称）-&amp;gt;（分类）-&amp;gt;（分类描述）也就是说存在非关键字段“分类描述”对关键字“商品名称”的传递函数依赖。 不符合第三范式要求的表存在下列问题1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录2.数">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/1.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/2.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/3.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/4.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/5.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/6.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/7.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/8.png">
+<meta property="og:image" content="http://www.sunnylian.com/2018/04/14/9.png">
+<meta property="og:updated_time" content="2018-04-14T09:38:19.733Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
+<meta name="twitter:title" content="MySQL数据库优化之数据库表的范式和反优化">
+<meta name="twitter:description" content="表的范式化范式化是指数据库设计的规范，目前说道范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖 在上表中，存在以下传递函数依赖关系：（商品名称）-&amp;gt;（分类）-&amp;gt;（分类描述）也就是说存在非关键字段“分类描述”对关键字“商品名称”的传递函数依赖。 不符合第三范式要求的表存在下列问题1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录2.数">
+<meta name="twitter:image" content="http://www.sunnylian.com/2018/04/14/1.png">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -149,69 +164,193 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MySQL数据库优化之数据库表的范式化和反范式化优化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/28/" class="archive-article-date">
-  	<time datetime="2018-02-28T08:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
-</a>
-        </div>
-    	 
+          <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/28/">IntelliJ IDEA 打包war包到tomcat</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL数据库优化之数据库表的范式和反优化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
+
+        
+        <a href="/2018/04/14/" class="archive-article-date">
+  	<time datetime="2018-04-14T09:22:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="表的范式化"><a href="#表的范式化" class="headerlink" title="表的范式化"></a>表的范式化</h4><p>范式化是指数据库设计的规范，目前说道范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖</p>
+<p><center><img src="/2018/04/14/1.png" alt="image"></center><br>在上表中，存在以下传递函数依赖关系：<br>（商品名称）-&gt;（分类）-&gt;（分类描述）<br>也就是说存在非关键字段“分类描述”对关键字“商品名称”的传递函数依赖。</p>
+<h5 id="不符合第三范式要求的表存在下列问题"><a href="#不符合第三范式要求的表存在下列问题" class="headerlink" title="不符合第三范式要求的表存在下列问题"></a>不符合第三范式要求的表存在下列问题</h5><p>1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录<br>2.数据的插入、更新和删除异常</p>
+<h5 id="解决异常"><a href="#解决异常" class="headerlink" title="解决异常"></a>解决异常</h5><p>对表进行拆分</p>
+<h4 id="表的反范式化"><a href="#表的反范式化" class="headerlink" title="表的反范式化"></a>表的反范式化</h4><p>反反范式化是指为了查询效率的考虑把原本符合第三范式的表适当的增加冗余，以达到优化查询效率的目的，反范式化是一种以空间来换取时间的操作。</p>
+<p><center><img src="/2018/04/14/2.png" alt="image"></center><br>例如在上述表中查询用户订单信息，需要关联多个表，SQL语句如下</p>
+<p><center><img src="/2018/04/14/3.png" alt="image"></center></p>
+<p><center><img src="/2018/04/14/4.png" alt="image"></center><br>这样，查询用户订单信息可以直接从订单表中查到，不需要再关联其他表</p>
+<p><center><img src="/2018/04/14/5.png" alt="image"></center></p>
+<h4 id="数据库表的垂直拆分"><a href="#数据库表的垂直拆分" class="headerlink" title="数据库表的垂直拆分"></a>数据库表的垂直拆分</h4><p>所谓垂直拆封，就是把原来的一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分可以按照以下原则进行：<br>1.把不常用的字段单独存放到一个表中。<br>2.把大字段独立存放到一个表中。<br>3.把经常一起使用的字段放到一起。</p>
+<p><center><img src="/2018/04/14/6.png" alt="image"></center><br>将该表分为以下两个表，就是将列分成两个表</p>
+<p><center><img src="/2018/04/14/7.png" alt="image"></center></p>
+<p><center><img src="/2018/04/14/8.png" alt="image"></center></p>
+<h4 id="数据库表的水平拆分"><a href="#数据库表的水平拆分" class="headerlink" title="数据库表的水平拆分"></a>数据库表的水平拆分</h4><p>表的水平拆分是为了解决单表的数据量过大的问题，水平拆分分表每一个表的机构都是完全一致的。</p>
+<p><center><img src="/2018/04/14/9.png" alt="image"></center></p>
+<h5 id="常用的水平拆分方法："><a href="#常用的水平拆分方法：" class="headerlink" title="常用的水平拆分方法："></a>常用的水平拆分方法：</h5><p>1.对customer_id进行hash运算，如果要拆分成5个表则使用mod(customer_id,5)取出0~4个值<br>2.针对不同的hashID把数据存到不同的表中。</p>
+<h5 id="挑战："><a href="#挑战：" class="headerlink" title="挑战："></a>挑战：</h5><p>1.跨分区表进行数据查询<br>2.统计及后台报表操作(前台为了提高查询效率使用分表，后台为了更好的统计需要汇总表)</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">IEDA</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">范式和反范式优化</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">war包</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">tomcat8</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/04/14/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/12/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL数据库优化之选择合适的数据类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
+  
+
+  
 
           </div>
         </div>
@@ -238,9 +377,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
