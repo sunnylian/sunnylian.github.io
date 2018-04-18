@@ -151,6 +151,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-select灰色提示设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/19/">select灰色提示设置</a>
+    </h1>
+  
+
+        
+        
+        <a href="/2018/01/19/" class="archive-article-date">
+  	<time datetime="2018-01-19T08:45:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;大家在做web前端的时候，经常需要设置很多的样式以满足需求，下图为我经常使用的一种下拉框样式，下拉列表中文字的颜色为黑色，文本框中的提示文字为灰色，不使用任何插件，样式如下图所示。</p>
+<center><img src="/2018/01/19/select灰色提示设置.png" alt="image"></center>
+
+<h4 id="1-select下拉框的值为固定值"><a href="#1-select下拉框的值为固定值" class="headerlink" title="1.select下拉框的值为固定值"></a>1.select下拉框的值为固定值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;operator&quot; style=&quot;height:25px; width:100px;color: rgb(110,110,110);&quot; onchange=&quot;setOperatorColor()&quot;&gt;</div><div class="line">                        &lt;option value =&quot;&quot; style=&quot;display: none&quot; disabled=&quot;disabled&quot; selected=&quot;selected&quot;&gt;比较符&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;=&quot; style=&quot;color: #000000;&quot; &gt;等于&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;&gt;&quot; style=&quot;color: #000000;&quot; &gt;大于&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;lessthan&quot; style=&quot;color: #000000;&quot; &gt;小于&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;like&quot; style=&quot;color: #000000;&quot; &gt;包含&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;&gt;=&quot; style=&quot;color: #000000;&quot; &gt;开始于&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;lessequal&quot; style=&quot;color: #000000;&quot; &gt;结束于&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;null&quot; style=&quot;color: #000000;&quot; &gt;为空&lt;/option&gt;</div><div class="line">                        &lt;option value =&quot;notNull&quot; style=&quot;color: #000000;&quot; &gt;不为空&lt;/option&gt;</div><div class="line">                    &lt;/select&gt;</div></pre></td></tr></table></figure>
+<h4 id="2-select下拉框的值不固定"><a href="#2-select下拉框的值不固定" class="headerlink" title="2.select下拉框的值不固定"></a>2.select下拉框的值不固定</h4><p>&emsp;&emsp;先给定下拉框，直接设置下拉框的颜色为灰色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;operator&quot; style=&quot;height:25px; width:100px;color: rgb(110,110,110);&quot; onchange=&quot;setOperatorColor()&quot;&gt;</div><div class="line">     &lt;option value =&quot;&quot; style=&quot;display: none&quot; disabled=&quot;disabled&quot; selected=&quot;selected&quot;&gt;比较符&lt;/option&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<p>使用js设置设置每个option的颜色。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function setOperatorColor()&#123;</div><div class="line">    var operator=document.getElementById(&apos;operator&apos;);</div><div class="line">    operator.options.length=0;//删除selectItem中所有选项</div><div class="line">    operator.style.color=&quot;#6E6E6E&quot;;</div><div class="line">    var op=new Option(&quot;分组项&quot;,&quot;分组项&quot;);</div><div class="line">    op.style.display=&quot;none&quot;;</div><div class="line">    operator.options.add(gp0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;当然，也可以使用插件select2来设计，同样也很方便。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">select标签</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/19/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-js动态设置超链接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -880,6 +969,18 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">war包</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">limit</a>
               </li>
              
@@ -904,14 +1005,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Max()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Count()</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
               </li>
              
@@ -924,15 +1017,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IEDA</a>
+                <a href="javascript:void(0)" class="js-tag color1">Max()</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">war包</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">tomcat8</a>
+                <a href="javascript:void(0)" class="js-tag color3">Count()</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -944,15 +1033,23 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">超链接</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -969,14 +1066,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">select标签</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">html</a>
               </li>
              
               <li class="article-tag-list-item">
