@@ -6,25 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>Max()和Count()的优化方法 | 我的博客</title>
+  <title>Archives: 2018/8 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、Max()优化  查询最晚的日期时可以采用max()函数进行查询，但是通过explain分析sql语句的查询计划，发现type为All型，并且需要检查4503条语句，效率非常的低。解决办法：在birthday_time上建立索引此时，重新执行SQL语句可以发现，数据库并没有进行任何语句的检查，因为数据库时默认对索引顺序排列，当进行查找时，直接将值返回即可，效率较高。2、Count()优化如何通">
-<meta name="keywords" content="MySQL,Max(),Count()">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Max()和Count()的优化方法">
-<meta property="og:url" content="http://www.sunnylian.com/2018/04/10/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="我的博客">
+<meta property="og:url" content="http://www.sunnylian.com/archives/2018/08/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="1、Max()优化  查询最晚的日期时可以采用max()函数进行查询，但是通过explain分析sql语句的查询计划，发现type为All型，并且需要检查4503条语句，效率非常的低。解决办法：在birthday_time上建立索引此时，重新执行SQL语句可以发现，数据库并没有进行任何语句的检查，因为数据库时默认对索引顺序排列，当进行查找时，直接将值返回即可，效率较高。2、Count()优化如何通">
-<meta property="og:image" content="http://www.sunnylian.com/2018/04/10/1.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/04/10/2.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/04/10/3.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/04/10/4.png">
-<meta property="og:image" content="http://www.sunnylian.com/2018/04/10/5.png">
-<meta property="og:updated_time" content="2018-04-10T13:25:21.406Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Max()和Count()的优化方法">
-<meta name="twitter:description" content="1、Max()优化  查询最晚的日期时可以采用max()函数进行查询，但是通过explain分析sql语句的查询计划，发现type为All型，并且需要检查4503条语句，效率非常的低。解决办法：在birthday_time上建立索引此时，重新执行SQL语句可以发现，数据库并没有进行任何语句的检查，因为数据库时默认对索引顺序排列，当进行查找时，直接将值返回即可，效率较高。2、Count()优化如何通">
-<meta name="twitter:image" content="http://www.sunnylian.com/2018/04/10/1.png">
+<meta name="twitter:title" content="我的博客">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -160,191 +149,69 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Max-和Count-的优化方法" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-          <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Max()和Count()的优化方法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/08/04/" class="archive-article-date">
+  	<time datetime="2018-08-04T09:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/08/04/">HTML5 FormData 实现文件上传</a>
     </h1>
   
 
-        
-		<span class="archive-article-date">
-			阅读量 <span id="busuanzi_value_page_pv"></span>
-		</span>
-
-        
-        <a href="/2018/04/10/" class="archive-article-date">
-  	<time datetime="2018-04-10T12:52:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、Max()优化<br> <img src="/2018/04/10/1.png" alt="image"></p>
-<p>查询最晚的日期时可以采用max()函数进行查询，但是通过explain分析sql语句的查询计划，发现type为All型，并且需要检查4503条语句，效率非常的低。<br>解决办法：<br>在birthday_time上建立索引<br><img src="/2018/04/10/2.png" alt="image"><br>此时，重新执行SQL语句<br><img src="/2018/04/10/3.png" alt="image"><br>可以发现，数据库并没有进行任何语句的检查，因为数据库时默认对索引顺序排列，当进行查找时，直接将值返回即可，效率较高。<br>2、Count()优化<br>如何通过一条SQL语句分别得到两个年份出生的人的数量。<br><img src="/2018/04/10/4.png" alt="image"><br>这种查询方法没有讲两个年份的人数分开<br>解决方法：<br><img src="/2018/04/10/5.png" alt="image"><br>当单独对某一列进行计数时，如果某一列的其中一个值为NULL，则count不会进行计数，count(<em>)对所有的行计数，包括NULL，这就是为什么有时候count(</em>)与count(column)有时不相等的原因了。count(YEAR(birthday_time)=1956 or null)指当年份不为1956时，默认为null，这样count就不进行计数了。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Max()</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">html</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Count()</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/04/10/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/04/11/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          索引优化SQL的方法
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/04/09/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Limit查询优化</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
+    
 
-  
-
-  
 
           </div>
         </div>
@@ -371,8 +238,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
