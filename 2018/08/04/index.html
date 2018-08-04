@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.sunnylian.com">
-  <title>Archives: 2018/4 | 我的博客</title>
+  <title>HTML5 FormData 实现文件上传 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://www.sunnylian.com/archives/2018/04/index.html">
+  <meta name="description" content="&amp;emsp;&amp;emsp;XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,我们还可以使用XMLHttpRequest的send()方法来异步的提交这个”表单”.比起普通的ajax,使用FormData的最大优点就是我们可以异步上传一个二进制文件.&amp;emsp;&amp;emsp;Form">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5 FormData 实现文件上传">
+<meta property="og:url" content="http://www.sunnylian.com/2018/08/04/index.html">
 <meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,我们还可以使用XMLHttpRequest的send()方法来异步的提交这个”表单”.比起普通的ajax,使用FormData的最大优点就是我们可以异步上传一个二进制文件.&amp;emsp;&amp;emsp;Form">
+<meta property="og:updated_time" content="2018-08-04T11:46:18.685Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
+<meta name="twitter:title" content="HTML5 FormData 实现文件上传">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,我们还可以使用XMLHttpRequest的send()方法来异步的提交这个”表单”.比起普通的ajax,使用FormData的最大优点就是我们可以异步上传一个二进制文件.&amp;emsp;&amp;emsp;Form">
   
     <link rel="alternative" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -149,337 +153,168 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-HTML5 FormData 实现文件上传" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+          <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      HTML5 FormData 实现文件上传
+    </h1>
   
+
+        
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
+
+        
+        <a href="/2018/08/04/" class="archive-article-date">
+  	<time datetime="2018-08-04T09:23:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-04</time>
+</a>
+        
+      </header>
     
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,我们还可以使用XMLHttpRequest的send()方法来异步的提交这个”表单”.比起普通的ajax,使用FormData的最大优点就是我们可以异步上传一个二进制文件.<br>&emsp;&emsp;FormData对象用以将数据编译成键值对，以便用XMLHttpRequest来发送数据。其主要用于发送表单数据，但亦可用于发送带键数据(keye,data)，而独立于表单使用。如果表单enctype属性设为multipart/form-data，则会使用表单的submit()方法来发送数据，从而，发送数据具有同样形式。<br>&emsp;&emsp;接下来看一个具体的例子，前台上传文件，后台接收文件并获取内容。</p>
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><p>&emsp;&emsp;前端定义一个form表单，注意<font color="red">enctype=”multipart/form”</font>这一句话要加上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;modal fade&quot; id=&quot;myModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot; aria-hidden=&quot;true&quot;&gt;</div><div class="line">    &lt;div class=&quot;modal-dialog&quot;&gt;</div><div class="line">        &lt;div class=&quot;modal-content&quot;&gt;</div><div class="line">            &lt;div class=&quot;modal-header&quot;&gt;</div><div class="line">                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;</div><div class="line">                    &amp;times;</div><div class="line">                &lt;/button&gt;</div><div class="line">                &lt;h4 class=&quot;modal-title&quot; id=&quot;myModalLabel&quot;&gt;</div><div class="line">                    学生信息表上传</div><div class="line">                &lt;/h4&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div class=&quot;modal-body&quot;&gt;</div><div class="line">                &lt;form id=&quot;formId&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">                    文件  &lt;input name=&quot;studentfile&quot; type=&quot;file&quot; id=&quot;studentfile&quot;&gt;</div><div class="line">                &lt;/form&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div class=&quot;modal-footer&quot;&gt;</div><div class="line">                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;关闭</div><div class="line">                &lt;/button&gt;</div><div class="line">                &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; onclick=&quot;fileSubmit()&quot;&gt;</div><div class="line">                    提交更改</div><div class="line">                &lt;/button&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;&lt;!-- /.modal-content --&gt;</div><div class="line">    &lt;/div&gt;&lt;!-- /.modal --&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><p>&emsp;&emsp;ajax向后台传递数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function fileSubmit() &#123;</div><div class="line">        var studentfiles = new FormData();</div><div class="line">        var fileObj = document.getElementById(&quot;studentfile&quot;).files[0]; // js 获取文件对象</div><div class="line">        studentfiles.append(&quot;file&quot;, fileObj);</div><div class="line">        $.ajax(&#123;</div><div class="line">            async: false,</div><div class="line">            type:&quot;post&quot;,</div><div class="line">            url:&quot;/student/upload&quot;,</div><div class="line">            data:studentfiles,</div><div class="line">            processData : false,  //必须false才会避开jQuery对formdata 的默认处理</div><div class="line">            contentType : false, //必须false才会自动加上正确的Content-Type</div><div class="line">            success:function (data) &#123;</div><div class="line">                layer.msg(&quot;上传成功&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="后台java"><a href="#后台java" class="headerlink" title="后台java"></a>后台java</h3><h5 id="1、仅仅获取文件存储到磁盘上"><a href="#1、仅仅获取文件存储到磁盘上" class="headerlink" title="1、仅仅获取文件存储到磁盘上"></a>1、仅仅获取文件存储到磁盘上</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@ApiOperation(value = &quot;上传学生信息&quot;)</div><div class="line">@RequestMapping(value = &quot;/upload&quot;,method = RequestMethod.POST)</div><div class="line">public void uploadStudentListInfo(HttpServletRequest request) throws Exception&#123;</div><div class="line">    Collection&lt;Part&gt; files = request.getParts();</div><div class="line">    Iterator&lt;Part&gt; it=files.iterator();</div><div class="line">    Part file=it.next();</div><div class="line">    String savePath = &quot;F:\\myFiles&quot;;</div><div class="line">    file.write(savePath + &quot;/&quot; + file.getSubmittedFileName());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2、读取txt文件内容"><a href="#2、读取txt文件内容" class="headerlink" title="2、读取txt文件内容"></a>2、读取txt文件内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">@ApiOperation(value = &quot;上传学生信息&quot;)</div><div class="line">@RequestMapping(value = &quot;/upload&quot;,method = RequestMethod.POST)</div><div class="line">public void uploadStudentListInfo(HttpServletRequest request) throws Exception&#123;</div><div class="line">    Collection&lt;Part&gt; files = request.getParts();</div><div class="line">    Iterator&lt;Part&gt; it=files.iterator();</div><div class="line">    Part file=it.next();</div><div class="line">    InputStream inputStream=file.getInputStream();</div><div class="line">    BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));</div><div class="line">    String line=null;</div><div class="line">    while ((line=bufferedReader.readLine())!=null)&#123;</div><div class="line">        System.out.println(line);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="3、读取Excel文件内容"><a href="#3、读取Excel文件内容" class="headerlink" title="3、读取Excel文件内容"></a>3、读取Excel文件内容</h5><p>pom.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">   &lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;org.apache.poi&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;poi&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;3.17&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;org.apache.poi&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;3.17&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">@ApiOperation(value = &quot;上传学生信息&quot;)</div><div class="line">@RequestMapping(value = &quot;/upload&quot;,method = RequestMethod.POST)</div><div class="line">public List&lt;Student&gt; uploadStudentListInfo(HttpServletRequest request) throws Exception&#123;</div><div class="line">    Collection&lt;Part&gt; files = request.getParts();</div><div class="line">    Iterator&lt;Part&gt; it=files.iterator();</div><div class="line">    Part file=it.next();</div><div class="line"></div><div class="line">    Workbook workbook=null;</div><div class="line">    if(file.getSubmittedFileName().endsWith(&quot;xlsx&quot;))&#123;</div><div class="line">        workbook = new XSSFWorkbook(file.getInputStream());</div><div class="line">    &#125;else if(file.getSubmittedFileName().endsWith(&quot;xls&quot;))&#123;</div><div class="line">        workbook = new HSSFWorkbook(file.getInputStream());</div><div class="line">    &#125;</div><div class="line">    Cell cell=null;</div><div class="line">    List&lt;Student&gt; studentList=new ArrayList&lt;Student&gt;();</div><div class="line">    //判断Excel中有几张表，目前只设定一张表</div><div class="line">    Sheet sheet=workbook.getSheetAt(0);//获取到sheet表</div><div class="line">    for(int rowIndex=2;rowIndex&lt;=sheet.getLastRowNum();rowIndex++)&#123;//获取到一行</div><div class="line">        Row row=sheet.getRow(rowIndex);</div><div class="line">        if(row==null)&#123;</div><div class="line">            continue;</div><div class="line">        &#125;</div><div class="line">        Student student=new Student();</div><div class="line">        List&lt;String&gt; strList=new ArrayList&lt;String&gt;();</div><div class="line">        for(int i=1;i&lt;row.getLastCellNum();i++)&#123;//获取到一列，第一列为序号</div><div class="line">            cell=row.getCell(i);</div><div class="line">            String value=&quot;&quot;;</div><div class="line">            switch (cell.getCellTypeEnum()) &#123;</div><div class="line">                case _NONE:</div><div class="line">                    break;</div><div class="line">                case STRING:</div><div class="line">                    value = cell.getStringCellValue();</div><div class="line">                    break;</div><div class="line">                case NUMERIC:</div><div class="line">                    Pattern points_ptrn = Pattern.compile(&quot;0.0+_*[^/s]+&quot;);</div><div class="line">                    if(DateUtil.isCellDateFormatted(cell))&#123; //日期</div><div class="line">                        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</div><div class="line">                        value = sdf.format(DateUtil.getJavaDate(cell.getNumericCellValue()));</div><div class="line">                    &#125; else if(&quot;@&quot;.equals(cell.getCellStyle().getDataFormatString())</div><div class="line">                            || &quot;General&quot;.equals(cell.getCellStyle().getDataFormatString())</div><div class="line">                            || &quot;0_ &quot;.equals(cell.getCellStyle().getDataFormatString()))&#123;</div><div class="line">                        //文本  or 常规 or 整型数值</div><div class="line">                        DecimalFormat df = new DecimalFormat(&quot;0&quot;);</div><div class="line">                        value = df.format(cell.getNumericCellValue());</div><div class="line">                    &#125; else if(points_ptrn.matcher(cell.getCellStyle().getDataFormatString()).matches()) &#123; //正则匹配小数类型</div><div class="line">                        value = String.valueOf(cell.getNumericCellValue());  //直接显示</div><div class="line">                    &#125;</div><div class="line">                    break;</div><div class="line">                default:</div><div class="line">                    value = cell.toString();</div><div class="line">            &#125;</div><div class="line">            if((i==2||i==3)&amp;&amp;value.equals(&quot;&quot;))&#123;</div><div class="line">                strList.clear();</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            strList.add(value);</div><div class="line">        &#125;</div><div class="line">        if(strList.size()==5) &#123;//将获取的一行数值赋值到对象的一个实例中</div><div class="line">            student.setStudentId(strList.get(0));</div><div class="line">            student.setStudentName(strList.get(1));</div><div class="line">            student.setClassNames(strList.get(2));</div><div class="line">            student.setMajor(strList.get(3));</div><div class="line">            student.setAcademy(strList.get(4));</div><div class="line">            studentList.add(student);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return studentList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/18/" class="archive-article-date">
-  	<time datetime="2018-04-18T15:03:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/18/">Python变量和数据类型</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://www.sunnylian.com/2018/08/04/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/14/" class="archive-article-date">
-  	<time datetime="2018-04-14T09:22:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/18/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python变量和数据类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/14/">MySQL数据库优化之数据库表的范式和反优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">范式和反范式优化</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/12/" class="archive-article-date">
-  	<time datetime="2018-04-12T09:04:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/12/">MySQL数据库优化之选择合适的数据类型</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/11/" class="archive-article-date">
-  	<time datetime="2018-04-11T09:34:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/11/">索引优化SQL的方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">索引优化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/10/" class="archive-article-date">
-  	<time datetime="2018-04-10T12:52:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/10/">Max()和Count()的优化方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Max()</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Count()</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/09/" class="archive-article-date">
-  	<time datetime="2018-04-09T08:50:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/09/">Limit查询优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">limit</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">查询优化</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/08/" class="archive-article-date">
-  	<time datetime="2018-04-08T15:18:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/08/">host header attack漏洞</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">web程序</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">漏洞</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/07/" class="archive-article-date">
-  	<time datetime="2018-04-07T08:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/07/">通过explain查询和分析SQL的执行计划</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-
 
           </div>
         </div>
@@ -506,8 +341,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
